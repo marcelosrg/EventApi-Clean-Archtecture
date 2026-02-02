@@ -5,7 +5,7 @@ import dev.java10x.EventClean.core.enums.TipoEvento;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public record Event(
+public record Evento(
         UUID id,
         String nome,
         String descricao,
