@@ -1,4 +1,4 @@
-package dev.java10x.EventClean.infra.persistence;
+package dev.java10x.EventClean.infra.persistence.Entities;
 
 import dev.java10x.EventClean.core.enums.TipoEvento;
 import jakarta.persistence.*;
