@@ -43,6 +43,7 @@ public class EventoEntity {
     @Column(name = "ORGANIZADOR")
     private String organizador;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "TIPO")
     private TipoEvento tipo;
 }
