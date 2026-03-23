@@ -40,7 +40,7 @@ public class EventoRepositoyGateway implements EventoGateway {
 
     @Override
     public Optional<Evento> buscarEventoPorIdentificador(String identificador) {
-       EventoEntity entity = eventRepository.findEventoEnityByIdentificador(identificador);
-       return Optional.ofNullable(eventEntityMapper.toDomain(entity));
+        return eventRepository.findEventoEnityByIdentificador(identificador)
+                .map(eventEntityMapper::toDomain);
     }
 }

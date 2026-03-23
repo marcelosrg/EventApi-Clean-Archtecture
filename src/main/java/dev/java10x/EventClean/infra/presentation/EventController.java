@@ -1,11 +1,10 @@
 package dev.java10x.EventClean.infra.presentation;
-
 import dev.java10x.EventClean.core.entities.Evento;
 import dev.java10x.EventClean.core.useCases.BuscarEventosCase;
 import dev.java10x.EventClean.core.useCases.CriarEventoUseCase;
+import dev.java10x.EventClean.core.useCases.FiltrarIdentificadorEventoUseCase;
 import dev.java10x.EventClean.infra.dtos.EventDto;
 import dev.java10x.EventClean.infra.mapper.EventDtoMapper;
-import dev.java10x.EventClean.infra.mapper.EventEntityMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -23,15 +22,19 @@ public class EventController {
 
     private final CriarEventoUseCase criarEventoUseCase;
     private final BuscarEventosCase buscarEventosCase;
+    private final FiltrarIdentificadorEventoUseCase filtrarEventoUseCase;
     private final EventDtoMapper eventDtoMapper;
 
 
     public EventController(CriarEventoUseCase criarEventoUseCase,
                            EventDtoMapper eventDtoMapper,
-                           BuscarEventosCase buscarEventosCase){
+                           BuscarEventosCase buscarEventosCase,
+                           FiltrarIdentificadorEventoUseCase filtrarEventoUseCase
+                           ){
         this.criarEventoUseCase = criarEventoUseCase;
         this.eventDtoMapper = eventDtoMapper;
         this.buscarEventosCase = buscarEventosCase;
+        this.filtrarEventoUseCase = filtrarEventoUseCase;
     }
 
     @PostMapping("create-event")
@@ -55,5 +58,10 @@ public class EventController {
         return eventos.stream()
                 .map(eventDtoMapper::toDto)
                 .collect(Collectors.toList());
+    }
+
+    @GetMapping("/{identificador}")
+    public EventDto getEventByIdentificador(@PathVariable String identificador){
+        return eventDtoMapper.toDto(filtrarEventoUseCase.execute(identificador));
     }
 }
