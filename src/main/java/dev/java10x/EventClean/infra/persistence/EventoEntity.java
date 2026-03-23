@@ -18,7 +18,7 @@ import java.util.UUID;
 public class EventoEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "ID")
     private UUID id;
 
@@ -44,6 +44,6 @@ public class EventoEntity {
     private String organizador;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "TIPO")
-    private TipoEvento tipo;
+    @Column(name = "TIPOEVENTO")
+    private TipoEvento tipoEvento;
 }

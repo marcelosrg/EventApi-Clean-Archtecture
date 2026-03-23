@@ -13,6 +13,6 @@ public class CriarEventoUseCaseImpl implements CriarEventoUseCase {
     }
     @Override
     public Evento execute(Evento event) {
-        return null;
+        return eventGateway.criarEvento(event);
     }
 }

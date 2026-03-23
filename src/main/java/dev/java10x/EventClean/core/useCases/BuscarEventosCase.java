@@ -2,8 +2,9 @@ package dev.java10x.EventClean.core.useCases;
 
 import dev.java10x.EventClean.core.entities.Evento;
 
-import java.util.UUID;
+import java.util.List;
 
-public interface buscarEventoCase {
-    public Evento execute(UUID id);
+
+public interface BuscarEventosCase {
+    public List<Evento> execute();
 }

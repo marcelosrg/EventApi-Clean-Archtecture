@@ -7,5 +7,6 @@ import java.util.Optional;
 
 public interface EventoGateway {
     Evento criarEvento(Evento evento);
+    List<Evento> listarEventos();
 
 }
