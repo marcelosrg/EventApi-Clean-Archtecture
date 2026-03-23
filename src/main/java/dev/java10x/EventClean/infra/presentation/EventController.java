@@ -6,9 +6,14 @@ import dev.java10x.EventClean.core.useCases.CriarEventoUseCase;
 import dev.java10x.EventClean.infra.dtos.EventDto;
 import dev.java10x.EventClean.infra.mapper.EventDtoMapper;
 import dev.java10x.EventClean.infra.mapper.EventEntityMapper;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController()
@@ -30,17 +35,23 @@ public class EventController {
     }
 
     @PostMapping("create-event")
-    public EventDto createEvent(@RequestBody EventDto eventoDto){
+    public ResponseEntity<EventDto> createEvent(@RequestBody EventDto eventoDto) {
 
-        Evento createEvento = criarEventoUseCase.execute(eventDtoMapper.toDomain(eventoDto));
+        Evento created = criarEventoUseCase.execute(eventDtoMapper.toDomain(eventoDto));
+        EventDto responseDto = eventDtoMapper.toDto(created);
 
-        return eventDtoMapper.toDto(createEvento);
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(created.id())
+                .toUri();
+
+        return ResponseEntity.created(location).body(responseDto);
     }
 
     @GetMapping
     public List<EventDto> getAllEvents(){
        List<Evento> eventos = buscarEventosCase.execute();
-
         return eventos.stream()
                 .map(eventDtoMapper::toDto)
                 .collect(Collectors.toList());

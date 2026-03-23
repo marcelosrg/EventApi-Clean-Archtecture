@@ -8,6 +8,7 @@ import dev.java10x.EventClean.infra.persistence.EventRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -35,5 +36,11 @@ public class EventoRepositoyGateway implements EventoGateway {
         return events.stream()
                 .map(eventEntityMapper::toDomain)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Optional<Evento> buscarEventoPorIdentificador(String identificador) {
+       EventoEntity entity = eventRepository.findEventoEnityByIdentificador(identificador);
+       return Optional.ofNullable(eventEntityMapper.toDomain(entity));
     }
 }
