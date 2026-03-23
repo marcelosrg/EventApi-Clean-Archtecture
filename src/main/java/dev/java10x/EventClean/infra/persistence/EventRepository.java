@@ -1,6 +1,5 @@
-package dev.java10x.EventClean.infra.persistence.Repositoy;
+package dev.java10x.EventClean.infra.persistence;
 
-import dev.java10x.EventClean.infra.persistence.Entities.EventoEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;

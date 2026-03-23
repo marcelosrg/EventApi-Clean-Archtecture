@@ -2,24 +2,27 @@ package dev.java10x.EventClean.infra.gateway;
 
 import dev.java10x.EventClean.core.entities.Evento;
 import dev.java10x.EventClean.core.gateway.EventoGateway;
-import dev.java10x.EventClean.infra.mapper.EventMapper;
-import dev.java10x.EventClean.infra.persistence.Entities.EventoEntity;
-import dev.java10x.EventClean.infra.persistence.Repositoy.EventRepository;
+import dev.java10x.EventClean.infra.mapper.EventEntityMapper;
+import dev.java10x.EventClean.infra.persistence.EventoEntity;
+import dev.java10x.EventClean.infra.persistence.EventRepository;
+import org.springframework.stereotype.Component;
 
+@Component
 public class EventoRepositoyGateway implements EventoGateway {
 
     private final EventRepository eventRepository;
-    private final EventMapper eventMapper;
+
+    private final EventEntityMapper eventEntityMapper;
     public EventoRepositoyGateway(EventRepository eventRepository,
-                                  EventMapper eventMapper){
+                                  EventEntityMapper eventEntityMapper) {
         this.eventRepository = eventRepository;
-        this.eventMapper = eventMapper;
+        this.eventEntityMapper = eventEntityMapper;
     }
 
     @Override
     public Evento criarEvento(Evento evento){
-        EventoEntity entity = eventMapper.toEntity(evento);
+        EventoEntity entity = eventEntityMapper.toEntity(evento);
         EventoEntity createEvent = eventRepository.save(entity);
-        return  eventMapper.toDomain(createEvent);
+        return  eventEntityMapper.toDomain(createEvent);
     }
 }

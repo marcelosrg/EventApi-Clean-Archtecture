@@ -6,9 +6,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface EventoGateway {
-    Optional<Evento> filtrarPorIdentificador(String identificador);
-    Optional<Evento> filtrarPorNome(String nome);
     Evento criarEvento(Evento evento);
-    List<Evento> buscarEventos();
-    boolean existePorIdentificador(String identificador);
+
 }

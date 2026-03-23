@@ -1,7 +1,7 @@
 package dev.java10x.EventClean.infrastructure.beans;
 import dev.java10x.EventClean.core.gateway.EventoGateway;
-import dev.java10x.EventClean.core.useCases.CriarEventoCase;
-import dev.java10x.EventClean.core.useCases.criarEventoCaseImpl;
+import dev.java10x.EventClean.core.useCases.CriarEventoUseCase;
+import dev.java10x.EventClean.core.useCases.CriarEventoUseCaseImpl;
 import dev.java10x.EventClean.core.usecases.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,8 +10,8 @@ import org.springframework.context.annotation.Configuration;
 public class BeanConfiguration {
 
     @Bean
-    public CriarEventoCase criarEventoUsecase(EventoGateway eventoGateway) {
-        return new criarEventoCaseImpl(eventoGateway);
+    public CriarEventoUseCase criarEventoUsecase(EventoGateway eventoGateway) {
+        return new CriarEventoUseCaseImpl(eventoGateway);
     }
 
 
